@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>To Biju Mam — With Love & Gratitude</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold: #c9922a;
+    --gold-light: #f0c96e;
+    --gold-pale: #fdf3dc;
+    --deep: #0d0a1a;
+    --deep2: #1a1428;
+    --navy: #12203f;
+    --cream: #faf6ef;
+    --rose: #c96b6b;
+    --sage: #6b9e8a;
+    --ink: #2c1f0e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-trail {
+    position: fixed;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-light);
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.35s ease;
+    opacity: 0.5;
+  }
+
+  /* PARTICLES CANVAS */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,146,42,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 80% 80%, rgba(201,107,107,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 20%, rgba(107,158,138,0.07) 0%, transparent 60%),
+      linear-gradient(180deg, #0d0a1a 0%, #1a1428 50%, #12203f 100%);
+  }
+
+  .hero-ornament {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 1.2s 0.6s forwards;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title span.gold {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .hero-title span.outline {
+    -webkit-text-stroke: 1px rgba(240,201,110,0.6);
+    color: transparent;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: rgba(250,246,239,0.6);
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .scroll-hint {
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(201,146,42,0.6);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* FLOATING STARS */
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gold-light);
+    animation: twinkle var(--dur, 3s) ease-in-out infinite;
+    opacity: 0;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: var(--op, 0.8); transform: scale(1); }
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-label.visible { opacity: 1; transform: translateX(0); }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+  }
+
+  .section-title.visible { opacity: 1; transform: translateY(0); }
+
+  .story-text {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 2;
+    color: rgba(250,246,239,0.8);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    max-width: 780px;
+  }
+
+  .story-text.visible { opacity: 1; transform: translateY(0); }
+
+  .story-text em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 0 auto;
+    opacity: 0.3;
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+  }
+
+  /* YEAR BADGE */
+  .year-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(201,146,42,0.15), rgba(201,146,42,0.05));
+    border: 1px solid rgba(201,146,42,0.3);
+    border-radius: 100px;
+    padding: 0.5rem 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .year-badge.visible { opacity: 1; transform: scale(1); }
+
+  /* MEMORY CARD GRID */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .memory-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 16px;
+    padding: 1.8rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px) rotate(var(--rot, 0deg));
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+    cursor: default;
+  }
+
+  .memory-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(201,146,42,0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .memory-card:hover::before { opacity: 1; }
+  .memory-card:hover { transform: translateY(-5px) rotate(0deg) !important; border-color: rgba(201,146,42,0.5); }
+
+  .memory-card.visible { opacity: 1; transform: translateY(0) rotate(var(--rot, 0deg)); }
+
+  .memory-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .memory-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin-bottom: 0.5rem;
+  }
+
+  .memory-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(250,246,239,0.6);
+  }
+
+  /* TEAM SECTION */
+  .team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .team-pill {
+    background: linear-gradient(135deg, rgba(201,146,42,0.15), rgba(201,107,107,0.1));
+    border: 1px solid rgba(201,146,42,0.25);
+    border-radius: 100px;
+    padding: 0.6rem 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--gold-pale);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+  }
+
+  .team-pill.visible { opacity: 1; transform: scale(1); }
+  .team-pill.me {
+    background: linear-gradient(135deg, rgba(201,146,42,0.35), rgba(201,107,107,0.2));
+    border-color: var(--gold);
+    color: var(--gold-light);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* GAME SHOWCASE */
+  .game-showcase {
+    margin-top: 3rem;
+    background: linear-gradient(135deg, rgba(18,32,63,0.8), rgba(26,20,40,0.8));
+    border: 1px solid rgba(201,146,42,0.2);
+    border-radius: 24px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .game-showcase.visible { opacity: 1; transform: translateY(0); }
+
+  .game-showcase::before {
+    content: '★';
+    position: absolute;
+    font-size: 20rem;
+    top: -4rem;
+    right: -3rem;
+    color: rgba(201,146,42,0.04);
+    font-family: serif;
+    line-height: 1;
+  }
+
+  .game-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+  }
+
+  .game-desc {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: rgba(250,246,239,0.75);
+    max-width: 600px;
+  }
+
+  .best-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), #e6a020);
+    color: var(--ink);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    border-radius: 100px;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 0 30px rgba(201,146,42,0.4);
+  }
+
+  /* PHOTO FRAME */
+  .photo-frame {
+    margin: 3rem auto;
+    max-width: 500px;
+    position: relative;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .photo-frame.visible { opacity: 1; transform: scale(1); }
+
+  .photo-inner {
+    background: linear-gradient(135deg, rgba(201,146,42,0.1), rgba(201,107,107,0.05));
+    border: 2px solid rgba(201,146,42,0.3);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .photo-inner::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid rgba(201,146,42,0.15);
+    border-radius: 24px;
+  }
+
+  .photo-emoji { font-size: 4rem; margin-bottom: 1rem; display: block; }
+
+  .photo-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-top: 1rem;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin-top: 3rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s);
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 0.3rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 15px var(--gold);
+  }
+
+  .timeline-year {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: rgba(250,246,239,0.75);
+  }
+
+  /* QUOTE SECTION */
+  .quote-section {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 8rem 2rem;
+    background: linear-gradient(180deg, transparent, rgba(201,146,42,0.04), transparent);
+  }
+
+  .big-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.8rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--cream);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .big-quote.visible { opacity: 1; transform: translateY(0); }
+
+  .big-quote::before {
+    content: '\201C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem;
+    color: rgba(201,146,42,0.15);
+    position: absolute;
+    top: -4rem; left: -2rem;
+    line-height: 1;
+  }
+
+  .quote-gold { color: var(--gold-light); }
+
+  .quote-author {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-top: 2.5rem;
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  }
+
+  .quote-author.visible { opacity: 1; }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(201,146,42,0.15);
+  }
+
+  .footer-heart {
+    font-size: 3rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+  }
+
+  .footer-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-sub {
+    font-size: 0.9rem;
+    color: rgba(250,246,239,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* FLOATING PETALS */
+  .petal {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    font-size: 1.2rem;
+    animation: petalFall var(--dur) linear var(--delay) infinite;
+  }
+
+  @keyframes petalFall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* GLOW ORBS */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+    opacity: 0.12;
+    animation: orbFloat var(--dur, 10s) ease-in-out infinite;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -20px); }
+    66% { transform: translate(-20px, 30px); }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PIZZA CELEBRATION */
+  .celebration-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .celebration-emoji {
+    font-size: 2rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) var(--delay, 0s);
+    display: inline-block;
+  }
+
+  .celebration-emoji.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    section { padding: 4rem 1.5rem; }
+    .memory-grid { grid-template-columns: 1fr; }
+    .big-quote::before { display: none; }
+  }
+
+  /* SCROLL PROGRESS */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), var(--rose));
+    z-index: 9999;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  /* NAV DOTS */
+  .nav-dots {
+    position: fixed;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    z-index: 100;
+  }
+
+  .nav-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(201,146,42,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid rgba(201,146,42,0.4);
+  }
+
+  .nav-dot.active, .nav-dot:hover {
+    background: var(--gold);
+    transform: scale(1.5);
+    box-shadow: 0 0 10px var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<!-- Canvas for particles -->
+<canvas id="particles"></canvas>
+
+<!-- Glow orbs -->
+<div class="orb" style="width:600px;height:600px;background:var(--gold);top:10%;left:-15%;--dur:12s"></div>
+<div class="orb" style="width:400px;height:400px;background:var(--rose);bottom:20%;right:-10%;--dur:15s"></div>
+<div class="orb" style="width:300px;height:300px;background:var(--sage);top:50%;left:30%;--dur:18s"></div>
+
+<!-- Nav Dots -->
+<nav class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-section="0" title="Home"></div>
+  <div class="nav-dot" data-section="1" title="FY"></div>
+  <div class="nav-dot" data-section="2" title="The Game"></div>
+  <div class="nav-dot" data-section="3" title="SY"></div>
+  <div class="nav-dot" data-section="4" title="TY"></div>
+  <div class="nav-dot" data-section="5" title="Quote"></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="sec0">
+  <div class="hero-bg"></div>
+
+  <!-- Stars -->
+  <div id="starsContainer"></div>
+
+  <div style="position:relative;z-index:2;">
+    <div class="hero-ornament">✦ A Tribute with Love ✦</div>
+    <h1 class="hero-title">
+      <span class="outline">Biju</span><br>
+      <span class="gold">Mam</span>
+    </h1>
+    <p class="hero-subtitle">
+      Some teachers change a subject.<br>
+      <em>You changed a life.</em>
+    </p>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll to explore our story
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: FY Begins -->
+<div class="divider"></div>
+
+<section id="sec1">
+  <span class="section-label">Chapter One</span>
+  <div class="year-badge">🎓 First Year — FY</div>
+  <h2 class="section-title">The Beginning of<br><em style="color:var(--gold-light)">Everything</em></h2>
+  <p class="story-text">
+    Room No. 15. First lecture. I was sitting by the door, at the last desk — completely unbothered. When you walked in, everyone was listening carefully. Not me. I had this thought: <em>"Why should I even listen to all this?"</em>
+    <br><br>
+    You started teaching C language — our subject was IP — and honestly, from day one, coding was not my world. I was doing BSc-IT just for the degree. Sitting in class, having fun in the back row, living in my own universe.
+    <br><br>
+    You were strict. I was the guy with a chill mind — no filters, just pure natural energy. You noticed me. You even got frustrated with me sometimes. And I remember thinking, <em>"Why is she getting angry?"</em> — not out of ego, just because that's who I genuinely am.
+    <br><br>
+    But then — something happened. Day by day, we started talking. And before I even realised it, our bond had quietly grown into something <em>like a mother and son.</em>
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 2: The Game -->
+<section id="sec2">
+  <span class="section-label">Chapter Two</span>
+  <h2 class="section-title">The Project That<br><em style="color:var(--gold-light)">Became Legendary</em></h2>
+  <p class="story-text">
+    You gave us a SCRATCH project — make a game. 10 members per group. And we decided right away: <em>we are not making something ordinary.</em>
+  </p>
+
+  <div class="team-grid" style="margin-top:2.5rem;">
+    <span class="team-pill" style="--delay:0s">Sanjana</span>
+    <span class="team-pill" style="--delay:0.1s">Kusum</span>
+    <span class="team-pill" style="--delay:0.15s">Pawan</span>
+    <span class="team-pill" style="--delay:0.2s">Melita</span>
+    <span class="team-pill" style="--delay:0.25s">Chirag</span>
+    <span class="team-pill me" style="--delay:0.3s">★ Muhib</span>
+    <span class="team-pill" style="--delay:0.35s">Shivam</span>
+    <span class="team-pill" style="--delay:0.4s">Abhijit</span>
+    <span class="team-pill" style="--delay:0.45s">Raj</span>
+    <span class="team-pill" style="--delay:0.5s">Om</span>
+  </div>
+
+  <div class="game-showcase">
+    <div class="game-title">"Journey to Alpha Centauri"</div>
+    <p class="game-desc">
+      Not just a game — a story. An experience. We poured everything into it. It wasn't built for fun; it was built with <em>passion</em>. The presentation day arrived. We stumbled the first time — online, first experience, many mistakes. But we asked for another chance. We came back, offline, in the IT Lab — and we presented like we meant it.
+      <br><br>
+      And we already knew, deep down: <em>our game was the best in that entire batch.</em>
+    </p>
+    <div class="best-badge">🏆 The Best Game of the Batch</div>
+  </div>
+
+  <!-- Celebration -->
+  <div style="margin-top:3rem;">
+    <p class="story-text" style="margin-bottom:1rem;">
+      And after all of that — after the hard work, the nerves, the triumph — we all went to <em>Lapinoz for pizza.</em> 🍕
+    </p>
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <span class="photo-emoji">🎉</span>
+        <p style="color:rgba(250,246,239,0.7);font-size:1rem;line-height:1.7">That first group photo after the presentation.<br>Everyone smiling. Everyone proud.</p>
+        <div class="photo-caption">— After Presentation, FY —</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="celebration-row">
+    <span class="celebration-emoji" style="--delay:0s">🍕</span>
+    <span class="celebration-emoji" style="--delay:0.1s">🎮</span>
+    <span class="celebration-emoji" style="--delay:0.2s">🌟</span>
+    <span class="celebration-emoji" style="--delay:0.3s">🚀</span>
+    <span class="celebration-emoji" style="--delay:0.4s">✨</span>
+    <span class="celebration-emoji" style="--delay:0.5s">🏆</span>
+    <span class="celebration-emoji" style="--delay:0.6s">💛</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 3: SY -->
+<section id="sec3">
+  <span class="section-label">Chapter Three</span>
+  <div class="year-badge">📚 Second Year — SY</div>
+  <h2 class="section-title">Memories That<br><em style="color:var(--gold-light)">Flew By</em></h2>
+  <p class="story-text">
+    By SY, our bond was strong. Unspoken, but felt. Things started moving fast — <em>beautifully fast</em> — like a film on fast-forward where every frame is gold.
+  </p>
+
+  <div class="memory-grid" style="margin-top:2.5rem;">
+    <div class="memory-card" style="--delay:0s;--rot:-1deg">
+      <span class="memory-icon">👗</span>
+      <h3>Traditional Day</h3>
+      <p>Colours, culture, laughter. Everyone dressed up, everyone alive.</p>
+    </div>
+    <div class="memory-card" style="--delay:0.1s;--rot:1.5deg">
+      <span class="memory-icon">🍎</span>
+      <h3>Teachers' Day</h3>
+      <p>A day we got to say thank you — even if only through actions.</p>
+    </div>
+    <div class="memory-card" style="--delay:0.2s;--rot:-0.5deg">
+      <span class="memory-icon">🌊</span>
+      <h3>Beach Cleaning</h3>
+      <p>Standing by the ocean, doing something that actually mattered.</p>
+    </div>
+    <div class="memory-card" style="--delay:0.3s;--rot:1deg">
+      <span class="memory-icon">🤖</span>
+      <h3>AIML Project</h3>
+      <p>Diving into artificial intelligence — a different kind of challenge.</p>
+    </div>
+    <div class="memory-card" style="--delay:0.4s;--rot:-1.5deg">
+      <span class="memory-icon">🧘</span>
+      <h3>Yoga Activity</h3>
+      <p>After exams. 2 CC credits. Peace, laughter, and stretched muscles.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SECTION 4: TY -->
+<section id="sec4">
+  <span class="section-label">Chapter Four — The Last</span>
+  <div class="year-badge">🎓 Third Year — TY</div>
+  <h2 class="section-title">The Final Chapter,<br><em style="color:var(--gold-light)">Forever in the Heart</em></h2>
+
+  <div class="timeline">
+    <div class="timeline-item" style="--delay:0s">
+      <div class="timeline-year">The Start</div>
+      <div class="timeline-content">Every year I told myself: this time I'll pay attention to every lecture. Every year, the boredom crept back. Not laziness — just a mind that never clicked with code. And yet, somehow, I always showed up.</div>
+    </div>
+    <div class="timeline-item" style="--delay:0.15s">
+      <div class="timeline-year">ASP.NET</div>
+      <div class="timeline-content">The hardest subject in my entire BSc-IT journey. The portion was vast. The concepts were foreign. But I sat through it — and that's something.</div>
+    </div>
+    <div class="timeline-item" style="--delay:0.3s">
+      <div class="timeline-year">The Real Me</div>
+      <div class="timeline-content">Maybe I don't have the "manners" that the world expects. But the honest truth is — I never wanted to be under anyone. My mindset formed that way, for a thousand reasons. And I know, 1000%, it's right for me.</div>
+    </div>
+    <div class="timeline-item" style="--delay:0.45s">
+      <div class="timeline-year">Your Advice</div>
+      <div class="timeline-content">But then I asked you — just once, for a final piece of advice. And you said: <em style="color:var(--gold-light)">"Respect and learn how to talk with people."</em> That's it. Simple. True. I'll get there — not immediately, not eventually — but surely.</div>
+    </div>
+    <div class="timeline-item" style="--delay:0.6s">
+      <div class="timeline-year">Forever</div>
+      <div class="timeline-content">These memories can never fully be put into words. But they will be with me. Till my last breath.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUOTE SECTION -->
+<div class="quote-section" id="sec5">
+  <blockquote class="big-quote">
+    <span class="quote-gold">"Your discipline shapes minds,</span> your dedication builds futures, and your strength inspires us all. You don't just teach lessons — <span class="quote-gold">you teach life</span> through your hard work, your kindness, and your unwavering commitment to both your students and your family. <span class="quote-gold">We are truly grateful for everything you do."</span>
+  </blockquote>
+  <div class="quote-author">— Muhib, with love & gratitude 💛</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-heart">💛</span>
+  <div class="footer-text">Thank You, Biju Mam</div>
+  <div class="footer-sub" style="margin-top:0.5rem;font-size:1rem;color:rgba(250,246,239,0.5)">FY → SY → TY → Forever</div>
+  <br>
+  <div class="footer-sub">Made with every memory, every laugh, every lesson ✦</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx = 0, my = 0, tx = 0, ty = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+
+function animTrail() {
+  tx += (mx - tx) * 0.12;
+  ty += (my - ty) * 0.12;
+  trail.style.left = tx - 16 + 'px';
+  trail.style.top = ty - 16 + 'px';
+  requestAnimationFrame(animTrail);
+}
+animTrail();
+
+// Stars in hero
+const starsContainer = document.getElementById('starsContainer');
+for (let i = 0; i < 60; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  const size = Math.random() * 3 + 1;
+  star.style.cssText = `
+    width:${size}px;height:${size}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --dur:${2+Math.random()*4}s;
+    --op:${0.3+Math.random()*0.7};
+    animation-delay:${Math.random()*4}s;
+    position:absolute;
+  `;
+  starsContainer.appendChild(star);
+}
+
+// Particle canvas
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+const particles = [];
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: -Math.random() * 0.5 - 0.1,
+    r: Math.random() * 1.5 + 0.3,
+    alpha: Math.random() * 0.4 + 0.1,
+    color: Math.random() > 0.5 ? '#c9922a' : '#f0c96e'
+  });
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.alpha;
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.y < -10) p.y = canvas.height + 10;
+    if (p.x < -10) p.x = canvas.width + 10;
+    if (p.x > canvas.width + 10) p.x = -10;
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// Floating petals
+const petals = ['✿', '❀', '✦', '⋆', '✧'];
+for (let i = 0; i < 12; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  p.textContent = petals[Math.floor(Math.random() * petals.length)];
+  p.style.cssText = `left:${Math.random()*100}%;--dur:${8+Math.random()*15}s;--delay:${Math.random()*10}s;color:rgba(201,146,42,${0.2+Math.random()*0.3});`;
+  document.body.appendChild(p);
+}
+
+// Scroll progress
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  progressBar.style.width = pct + '%';
+});
+
+// Intersection Observer for animations
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll(
+  '.section-label, .section-title, .story-text, .year-badge, .memory-card, .team-pill, .game-showcase, .photo-frame, .timeline-item, .big-quote, .quote-author, .celebration-emoji'
+).forEach(el => observer.observe(el));
+
+// Nav dots
+const sections = ['sec0','sec1','sec2','sec3','sec4','sec5'];
+const dots = document.querySelectorAll('.nav-dot');
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const idx = parseInt(dot.dataset.section);
+    document.getElementById(sections[idx]).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = sections.indexOf(entry.target.id);
+      if (idx !== -1) {
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+</script>
+</body>
+</html>
